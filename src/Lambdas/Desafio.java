@@ -16,9 +16,17 @@ public class Desafio {
         UnaryOperator<Double> frete =
                 pr -> pr >= 3000 ? pr + 100 : pr + 50 ;
         UnaryOperator<Double> arrendondar =
-                pr -> Double.parseDouble(String.format("%.2f",pr));
+                pr -> Double.parseDouble(String.format("%.2f",pr).replace(",", "."));
         Function<Double,String > formatar =
-                pr -> "O valor é R$" + pr;
+                pr -> ("O valor é R$" + pr).replace(".", ",");
+
+        System.out.println(precoDesconto
+                .andThen(imposto)
+                .andThen(frete)
+                .andThen(arrendondar)
+                .andThen(formatar)
+                .apply(p));
+
 
     }
 }
